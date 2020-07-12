@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>이도경 포트폴리오</title>
+	
+	<style>
+		/*모든 스타일의 마진과 패딩을 0으로 설정*/
+		* {
+			margin: 0px; padding: 0px; text-decoration: none;
+		}
+		html, body, head {height: 100%; width: 100%; }
+		/*바디 태그의 배경색*/
+		body { background-color: #d8d8d8;} 
+		/*상단매뉴의 스타일 */
+		header {width: 100%;}
+
+		.infinite{-webkit-animation-iteration-count:infinite;}/*무한반복 애니메이션*/
+
+		.nav { top: -1px; left: 0%;
+			width: 100%; height: 50px; background-color: rgba(216, 216, 216, 0.95);
+			position: fixed; z-index: 999999; border: 1px solid black; transition: all ease 0s;
+		}
+		/*매뉴의 하이퍼링크*/
+		.nav a { 
+			text-align: center; font-size: 1.2em; line-height: 50px;
+			 border: 0px solid black; display: inline-block; height: 50px; width: 20%;
+			 color: black; 
+		}
+		/*매뉴의 커서를 댓을 때 */
+		.nav > a:hover {transition: all ease 0.5s; background-color: rgba(144, 144, 144, 0.6);}
+		/*매뉴 위치설정*/
+		.nav #homebut {
+			position: absolute; left: 12.5%; transform: translate(-50%, 0%);
+		}
+		.nav #aboutbut {
+			position: absolute; left: 37.5%; transform: translate(-50%, 0%);
+		}
+		.nav #portbut {
+			position: absolute; left: 62.5%; transform: translate(-50%, 0%);
+		}
+		.nav #contbut {
+			position: absolute; left: 87.5%; transform: translate(-50%, 0%);
+		}
+		
+		/*홈 화명영역 배경화면*/
+		#home {width: 100%; height: 100%; background: url(img/망했누.jpg); background-repeat: no-repeat; background-attachment: fixed; z-index: 1; background-position: center top; overflow: hidden; background-size: cover;
+		}
+		#titlename { margin: 0; width: 100%; top: -500px;}
+
+		#titlename h1 {position: absolute; transform: translate(-50%, -50%);  text-align: center; font-size: 10em; overflow: hidden; border: 0;
+			transition: all ease 0.5s; margin: 0; width: 90%;
+		}
+		#hello1 { left: 48%; top: 52%; color: #ffffff; z-index: 5;}
+		#hello2 { left: 49%; top: 51%; color: #7dbeda; z-index: 4;}
+		#hello3 { left: 50%; top: 50%; color: #323294; z-index: 3;}
+		#hello4 { left: 51%; top: 49%; color: #68629e; z-index: 2;}
+		#hello5 { left: 52%; top: 48%; color: #f8a2ab; z-index: 1;}
+
+		#DownArrow {position: absolute; left: 50%; bottom: 10%; transform: translate(-50%, -50%);
+			transition: all ease 0.5s; width: 7%;}
+		/*about 영역 위치설정*/
+		#about {
+			text-align: center; padding: 80px 15%; transition: all ease 0.5s;
+		}
+		/*프로필사진*/
+		#photo {
+				margin: 50px 0px; text-align: center;
+				box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
+			}
+		/*이름*/
+		#name {
+			font-size: 2.0em; margin: 50px 0; width: 100%;
+			 transform: translate(-20%, 0);
+		}
+		#name p {text-align: right; width: 100%;}
+		.abtext {color: black; font-size: 1.3em; text-align: left;}
+		.caption{
+			width: 700px; height: 100px; border-radius: 40px; z-index: 55;
+			background: linear-gradient(135deg, rgba(255, 220, 69, 0.7), rgba(252, 161, 115, 0.7)); box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.3);
+			transition: all ease 1s; line-height: 100px; margin: 0px;
+			position: relative; left: 50%; transform: translate(-50%, 0%);
+			overflow: hidden;
+		}
+		/*타임라인*/
+		#timeline { overflow: hidden;}
+		#timeline p {}
+		.emojis {width: 60px; height: 60px; z-index: 600; text-align: center; transition: all ease 0.5s;}
+		#emoji1 img {transform: translate(-400px, 90px);}
+		
+		/*자격증 공간*/
+		#emoji2 {transform: translate(-0%, 80px);}
+		#emoji2 img {transform: translate(400px, -75px);}
+		#license {
+			line-height: 20px; text-align: right; margin: 80px 0;
+			transform: translate(-10%, 0%);
+		}
+		/*스킬 속성*/
+		#skills {width: 100%;}
+		#emoji3 {}
+		#emoji3 p:nth-child(1) {text-align: center; font-size: 2.3em;}
+		#emoji3 img {transform: translate(0px, 50px);}
+		#skill{color: black; font-size: 1.3em; text-align: center; margin: 50px; position: relative;}
+		/*스킬 레벨값 등 속성*/
+		#skillgauges {position: relative; width: 100%; display: inline-block;}
+
+		#skillname {width: 42%; float: left; text-align: right;}
+		#skillgauge {width: 58%; float: left; text-align: left;}
+
+		.skillstext{
+			font-size: 30px; text-align: right; margin: 20px; display: block;
+			line-height: 30px; font-weight: lighter;
+		}
+		.gauge {
+			width: 500px; height: 20px; background-color: white; border-radius: 10px;
+			margin: 30px 0;
+		}
+		.gauge > div {
+			transition: all ease 0.5s;
+			border-radius: 10px; width: 0px; height: 20px;
+		}
+		.gauge > #maya {background-color: #0196a6;}
+		.gauge > #max {background-color: #0196a6;}
+		.gauge > #c4d {background-color: #53628a;}
+		.gauge > #ae {background-color: #b682db;}
+		.gauge > #pr {background-color: #9f88d0;}
+		.gauge > #ps {background-color: #00d9f6;}
+		.gauge > #hc {background-color: #f6db33;}
+
+		/*포트폴리오*/
+		#portfolios {
+			width: 100%;
+			background: linear-gradient(0deg, rgba(155, 155, 155, 0.3), rgba(118, 118, 118, 0.3)); position: relative; transition: all ease 0.5s;
+			width: 100%; text-align: center;
+			overflow: hidden; padding: 50px 0px 50px 0px;
+		}
+		#portfolios p {margin: 10px; }
+		#portfoliotitle {font-size: 4em; margin: 10px;}
+		.programes {
+			width: 100%; text-align: center; padding: 5px 0px; position: relative;
+		}
+		.programes > p {
+			height: 100%; width: 100%; font-style: italic;
+			background-color: rgba(144, 144, 144, 0.75); display: inline;
+		}
+		.porimg {
+			display: inline-block; width: 60%; margin: 30px;
+			box-shadow: 0px 16px 50px rgba(0, 0, 0, 0.3); border-radius: 30px;
+		}
+		#img3d1{
+			width: 60%; margin: 30px; box-shadow: 0px 16px 50px rgba(0, 0, 0, 0.3);
+			display: inline-block;
+		}
+		#y_longimg {
+			width: 100%; height: 780px; overflow: hidden; position: relative;
+			top: 30px; 
+		}
+		#img3d2 {
+			margin: 30 0px; box-shadow: 0px 16px 50px rgba(0, 0, 0, 0.3);
+			position: relative; display: inline-block;
+			transition: all ease 0s;
+		}
+		#img3d3{
+			width: 60%; margin: 30px;
+			box-shadow: 0px 16px 50px rgba(0, 0, 0, 0.3);
+			display: inline-block; border: 0px;
+		}
+		/*영상 영역*/
+		#videoport {
+			width: 100%; height: 100%;
+			background-color: rgba(177, 177, 177, 0); left: 50%;
+			top: 70px; position: relative; width: 100%; text-align: center;
+			transform: translate(-50%,0);overflow: hidden;  padding: 0px 0px 50px 0px;
+		}
+		.videoid{
+			margin: 30px 0px; display: inline-block;
+			box-shadow: 0px 16px 50px rgba(0, 0, 0, 0.3);
+			width: 60%;
+		}
+		#hcii {
+			font-size: 3.5em; font-weight: bold; margin: 20px 0 50px 0;
+			text-decoration: underline orange;
+		}
+		/*감사합니다.*/
+		#contactarea {width: 100%; height: 100%; text-align: center;overflow: hidden; padding: 50px 0px; position: relative;
+		}
+		#thank {
+			position: relative; top: 20%; margin: 50px 0px;
+		}
+		#contactarea #thank:nth-child(1) {top: 200px; width: 100%;
+			font-style: italic; font-weight: 1000; font-size: 90px;
+			background-color: rgba(50, 100, 100, 0.75); display: inline;
+		}
+
+		/*연락처*/
+		#cont_info {position: relative; top: 20%; }
+		#cont_info>div {float: left;}
+		#info {width: 20%;} #info_text {width: 80%;}
+		.cont_icon img {height: 50px; margin: 10px 20px; float: right;}
+		.cont_icon {float: right; display: inline; width: 100%}
+		#info_text{text-align: left; line-height: 50px;}
+		.info_text2 {width: 50%; float: left; margin: 10px 20px;}
+		.info_text2 > a {text-decoration: underline;}
+
+		/*고정바 (색반전모드, 탑 버튼)*/
+		#fixbut {position: fixed; bottom: 20px; right: 20px;}
+		#fixbut div:hover {background-color: rgba(255, 255, 255, 0.2);}
+		#fixbut > #reversal:hover {transition: all ease 0.5s; transform: rotate( 360deg );}
+		#fixbut > #reversal:active {transition: all ease 0.1s; transform: scale(0.9);}
+		#fixbut #topbutt:active {transition: all ease 0.1s; transform: scale(0.9);}
+		#fixbut div {transition: all ease 0.5s;
+			width: 100px; height: 100px; border-radius: 100px; margin: 20px; box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
+			background: linear-gradient( 45deg, rgba(255, 255, 255, 0.7), rgba(188, 188, 188, 0.7));
+		}
+		#reversal img {transition: all ease 0.5s;
+			width: 100px; height: 100px; position: relative; transform: translate(-50%, -50%); left: 50%; top: 50%; cursor:pointer;
+		}
+		#topbutt img {
+			width: 70px; height: 40px; position: relative; transform: translate(-50%, -50%); left: 50%; top: 50%;
+		}
+</style>
+<!--반응형 웹을 위한 스타일태그 (태블릿)-->
+<style>
+	@media screen and (min-width: 376px) and (max-width: 1024px) {
+		#titlename h1 {font-size: 5em;}
+		#timeline, #license{font-size: 1.3em;}
+		#about {padding: 80px 5%;} #name p {text-align: center;}
+		#name {transform: translate(0%, 0%);}
+		#emoji1 img {transform: translate(0px, 220px);}
+		#emoji2 img {transform: translate(0px, 00px);}
+		#license {transform: translate(0%, 0%);}
+		.caption {width: 75%; font-size: 15px;  margin: 30px 0;}
+		#skillname {width: 30%;} #skillgauge {width: 70%;}
+		.skillstext{font-size: 20px;transition: all ease 0.5s;}
+		.gauge {width: 90%;transition: all ease 0.5s;}
+		.gauge > div {transition: all ease 0.5s;}
+		.porimg, #img3d1, #img3d3, .videoid {width: 95%; transition: all ease 0.5s;
+		margin: 30px 0;}
+
+	}
+</style>
+<!--반응형 웹을 위한 스타일태그 (핸드폰)-->
+<style>
+	@media screen and (max-width: 375px) {
+		#titlename h1 {font-size: 4em;}
+		#photo {width: 90%} #timeline, #license{font-size: 0.95em;}
+		#about {padding: 80px 5%;} #name p {text-align: center;}
+		#name {transform: translate(0%, 0%);}
+		#emoji1 img {transform: translate(0px, 220px);}
+		#emoji2 img {transform: translate(0px, 00px);}
+		#license {transform: translate(0%, 0%);}
+		.caption {width: 95%; font-size: 15px; margin: 30px 0;}
+		#skillname {width: 30%;} #skillgauge {width: 70%;}
+		.skillstext{font-size: 20px;transition: all ease 0.5s;}
+		.gauge {width: 90%;transition: all ease 0.5s;}
+		.gauge > div {transition: all ease 0.5s;}
+		.porimg, #img3d1, #img3d3, .videoid {
+			width: 100%; transition: all ease 0.5s; margin: 30px 0; border-radius: 0px;
+		}
+		#y_longimg { height: 500px;} #img3d2 {height: 400px;}
+		#info{width: 25%;} #info_text {width: 75%;}
+		#fixbut {bottom: 5px; right: 0px;}
+		#fixbut div {width: 50px; height: 50px;}
+		#reversal img {width: 50px; height: 50px;}
+		#topbutt img {width: 35px; height: 20px;}
+		#contactarea #thank:nth-child(1) {top: 170px; font-size: 60px;}
+	}
+</style>
+<!--다크모드를 위한 스타일 태그-->
+<style>
+	@media (prefers-color-scheme: Dark) , ()
+	{ 
+		body {background-color: #181818;}
+		* { color: #fff }
+		body {color: #fff}
+		.nav {background-color: rgba(18, 18, 18, 0.95); border: 1px solid white;}
+		#fixbut {-webkit-filter: invert(1); filter: invert(1);}
+	}
+</style>
+</head>
+<body onresize="object_size()" onload="object_size()">
+	<header>
+		<div class="nav">
+				<a href="#home" id="homebut"><p>LEE's</p></a> 
+				<a href="#about" id="aboutbut"><p>About</p></a>
+				<a href="#portfolios" id="portbut"><p>Portfolio</p></a>
+				<a href="#contactarea" id="contbut"><p>Contact</p></a>
+		</div>
+	</header>
+	<div id="home">
+			<div id="titlename">
+				<h1 id="hello1">안녕하세요</h1>
+				<h1 id="hello2">안녕하세요</h1>
+				<h1 id="hello3">안녕하세요</h1>
+				<h1 id="hello4">안녕하세요</h1>
+				<h1 id="hello5">안녕하세요</h1>
+			</div>
+			<img  id="DownArrow" src="img/keyboard_arrow_down.png" onload="rendom1()">
+	</div>
+	<!--자기소개-->
+	<div id="about">
+		<img id="photo" src="img/이도경_증명사진.jpg">
+		<div id="name">
+			<p>
+				이도경<br>
+				LEEDOGYEONG
+			</p>
+		</div>
+		<div id="timeline" class="abtext">
+			<p>
+			Time line
+			<br>
+			<br>
+			2014&nbsp;&nbsp; 경주공업고등학교 전자제어과 입학<br>
+			<br>
+			2017&nbsp;&nbsp; 영진전문대학 컴퓨터정보계열 입학<br>
+			<br>
+			2018&nbsp;&nbsp; 육군 정보통신병과 C4I운용병 복무<br>
+			<br>
+			2020&nbsp;&nbsp; 피앤지프라자 사진편집직 근무<br>
+			<br>
+			~&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 영진전문대학 컴퓨터정보계열 재학<br>
+			</p>
+		</div>
+		<div id="emoji1">
+			<img src="img/tipping_hand.png" class="emojis">
+			<div class="caption" id="caption1">
+				<p id="ing">
+					2020년 06월 기준
+					영진전문대학교 컴퓨터정보계열 특수영상반 2학년 재학 중 입니다.
+				</p>
+			</div>
+		</div>
+
+		<div id="emoji2">
+			<div class="caption" id="caption2">
+				<p id="licensecomment">
+					고등학교를 거처 군 복무를 마치고 대학생활까지 틈틈이 공부하여 취득하였습니다.
+				</p>
+			</div>
+			<img src="img/books.png" class="emojis" onmouseover="show_cap()" onmouseout="hide_cap()">
+		</div>
+		<div id="license" class="abtext" id="caption3">
+			<p>
+				License<br>
+				<br>
+				워드프로세서 1급<br><br>
+				정보처리기능사<br><br>
+				컴퓨터활용능력 2급<br><br>
+				전자계산기기능사<br><br>
+				전자기기기능사<br><br>
+				통신선로기능사<br><br>
+				정보기기운용기능사<br><br>
+				정보처리산업기사<br><br>
+			</p>
+		</div>
+		
+		<div id="skills">
+			<div id="emoji3">
+				<div class="caption" id="caption3">
+					<p>
+						Always learning!
+					</p>
+				</div>
+				<img src="img/technologist.png" class="emojis">
+			</div>
+		</div>
+		<p id="skill">Skill</p>
+		<div id="skillgauges">
+			<div id="skillname">
+				<p class="skillstext">Auto Desk MAYA</p>
+				<p class="skillstext">Auto Desk 3DS MAX</p>
+				<p class="skillstext">Maxon Cinema 4D</p>
+				<p class="skillstext">Adobe After Effects</p>
+				<p class="skillstext">Adobe Premiere Pro</p>
+				<p class="skillstext">Adobe Photoshop</p>
+				<p class="skillstext">HTML5</p>
+			</div>
+			<div id="skillgauge">
+				<div class="gauge"><div id="maya"></div></div>
+				<div class="gauge"><div id="max"></div></div>
+				<div class="gauge"><div id="c4d"></div></div>
+				<div class="gauge"><div id="ae"></div></div>
+				<div class="gauge"><div id="pr"></div></div>
+				<div class="gauge"><div id="ps"></div></div>
+				<div class="gauge"><div id="hc"></div></div>
+			</div>
+		</div>
+	</div>
+	<!--포트폴리오-->
+	<div id="portfolios">
+		<div id="portfoliotitle" class="portext">
+			<p>Portfolio</p>
+		</div>
+		<!--포토샵 (사진)-->
+		<div class="programes">
+			<p >#Photoshop</p>
+		</div>
+		<img src="img/1701176이도경(광고).jpg" class="porimg">
+		<p>2020 #Photoshop 입체갑있는 이미지 합성</p>
+		<img src="img/1701176_이도경(네온).jpg" class="porimg">
+		<p>2020 #Photoshop 빛을 활용한 네온효과</p>
+		<img src="img/1701176_이도경(UIUX2목업).jpg" class="porimg">
+		<p>2020 #Photoshop 목업을 활용한 UI, UX 디자인</p>
+		<!--모델링 (사진, 영상)-->
+		<div class="programes">
+			<p >#3DModeling</p>
+		</div>
+		<img src="img/60/얼굴모델링00.jpg" id="img3d1">
+		<p>2020 #3DS MAX haed modeling (에드 헤리스)</p>
+		<div id="y_longimg">
+			<img src="img/mx.jpg" id="img3d2">
+		</div>
+		<p>2020 #MAYA Logitech MX Master 3 modeling</p>
+		<img src="img/manmodeling.png" id="img3d3">
+		<p>2020 #MAYA Human modeling</p>
+		<iframe class="videoid" src="https://www.youtube.com/embed/HnTpzfRICUo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<p>2020 #C4D Factory animation</p>
+
+		<!--영상제작 (영상)-->
+		<div class="programes">
+			<p >#VideoMaking</p>
+		</div>
+		<iframe class="videoid" src="https://www.youtube.com/embed/hO5bjbV9L9s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<p>2020 #PremierePro wolking vlog</p>
+		<iframe class="videoid" src="https://www.youtube.com/embed/y_8SAxSpOFA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<p>2020 #PremierePro suburban vlog</p>
+		<iframe class="videoid" src="https://www.youtube.com/embed/92U6c3yM-mw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<p>2017 #AfterEffects suburban vlog</p>
+
+		<!--HTML 영역-->
+		<div class="programes">
+			<p >#HTML+CSS</p>
+		</div>
+		<div id="hcii"><p>I created it.</p></div>
+	</div>
+	<!--contact 영역-->
+	<div id="contactarea">
+		<p id="thank">Thank you for<br>WATCH</p>
+		<p id="thank">If you want more info, listen to my story.</p>
+		<div id="cont_info">
+			<div id="info">
+				<div class="cont_icon"><img src="img/핸드폰.png"></div>
+				<div class="cont_icon"><img src="img/mail.png"></div>
+				<div class="cont_icon"><img src="img/인스타로고.png"></div>
+				<div class="cont_icon"><img src="img/blog.png"></div>
+			</div>
+			<div id="info_text">
+				<p class="info_text2">+82-10-2525-7198</p>
+				<p class="info_text2">lee7198@naver.com</p>
+				<p class="info_text2">@leeeedg_</p>
+				<p class="info_text2"><a href="https://blog.naver.com/lee7198" target="_blank">blog.naver.com/lee7198</a></p>
+			</div>
+		</div>
+	</div>
+	<!--고정메뉴-->
+	<div id="fixbut">
+		<div id="reversal" onclick="rev_cut()" >
+			<img src="img/태극2.png" >
+		</div>
+		<a href="#home">
+			<div id="topbutt" onclick="change_3dimg()">	
+				<img src="img/keyboard_arrow_up.png">
+			</div>
+		</a>
+	</div>
+</body>
+<script>
+	//색반전모드 스크립트(다크모드)
+	var y = 0;
+	function reversal2() {
+		document.getElementsByTagName("body")[0].style.backgroundColor = '#181818';
+		var x = document.querySelectorAll("p, a");
+		var i;
+		for (i = 0; i < x.length; i++) {
+			x[i].style.color = 'white'
+		}
+		document.querySelector('.nav').style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
+		document.querySelector('.nav').style.border = "1px solid #ffffff";
+		document.querySelector('#fixbut').style.WebkitFilter = "invert(1)";
+		document.querySelector('#fixbut').style.filter = "invert(1)";
+	}
+	function none_reversal() {
+		document.getElementsByTagName("body")[0].style.backgroundColor = '#d8d8d8';
+		var x = document.querySelectorAll("p, a");
+		var i;
+		for (i = 0; i < x.length; i++) {
+			x[i].style.color = 'black'
+		}
+		document.querySelector('.nav').style.backgroundColor = 'rgba(216, 216, 216, 0.95)';
+		document.querySelector('.nav').style.border = "1px solid #000000";
+		document.querySelector('#fixbut').style.WebkitFilter = "invert(0)";
+		document.querySelector('#fixbut').style.filter = "invert(0)";
+	}
+	function rev_cut() {
+		y = y + 1;
+		if (y % 2 == 1) {
+			reversal2()
+		} else {
+			none_reversal()
+		}
+	}
+</script>
+<script> const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: Dark)').matches console.log(prefersDark);</script>
+<!--스크롤 이벤트 스크립트-->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+<script>
+		window.onscroll = function() {scrollfun()};
+		function scrollfun() {
+			//홈 타이틀 효과의 스크립트
+			var s = 0;
+			var s1 = document.body.scrollTop;
+			var s2 = document.documentElement.scrollTop;
+			if (s1 < 0) {s = s1;} 
+			else if (s2 > 0) {s = s2;}
+
+			var wt3 = $("body").innerWidth();
+			if (wt3 <= 375) {
+				var fs = 4.5;
+			} else if (wt3 <= 1024) {
+				var fs = 5.5;
+			} else {
+				var fs = 11;
+			}
+
+	  		if (s % 30 == 1) {
+	    		document.getElementById('hello1').style.zIndex = s;
+	    		document.getElementById('hello1').style.fontSize = fs + 'em';
+			} else if (s % 30 == 7) {
+				document.getElementById('hello2').style.zIndex = s;
+	    		document.getElementById('hello2').style.fontSize = fs + 'em';
+			} else if (s % 30 == 7) {
+			} else if (s % 30 == 13) {
+				document.getElementById('hello3').style.zIndex = s;
+	    		document.getElementById('hello3').style.fontSize = fs + 'em';
+			} else if (s % 30 == 7) {
+			} else if (s % 50 == 19) {
+				document.getElementById('hello4').style.zIndex = s;
+	    		document.getElementById('hello4').style.fontSize = fs + 'em';
+			} else if (s % 30 == 7) {
+			} else if (s % 30 == 15) {
+				document.getElementById('hello5').style.zIndex = s;
+	    		document.getElementById('hello5').style.fontSize = fs + 'em';
+			} else if (s % 30 == 7) {
+			}
+
+			//일정 위치에 도달하면 캡션이 나타나게끔 하는 jquery
+			var c1 = $("#emoji1").offset();
+
+			if (s > c1.top - 500) //해당 영역보다 500px위에서 작동
+			{$("#caption1").css({"opacity": 1});} 
+			else {$("#caption1").css({"opacity": 0});}
+
+			var c2 = $("#emoji2").offset();
+			if (s > c2.top - 500) //해당 영역보다 500px위에서 작동
+			{$("#caption2").css({"opacity": 1});} 
+			else {$("#caption2").css({"opacity": 0});}
+
+			var c3 = $("#emoji3").offset();
+			if (s > c3.top - 500) //해당 영역보다 500px위에서 작동
+			{$("#caption3").css({"opacity": 1});} 
+			else {$("#caption3").css({"opacity": 0});}
+
+			//일정 위치에 도달하면 스킬 게이지가 늘어나는 jquery
+			var g1 = $("#skillgauge").offset();
+			var gw = $(".gauge").innerWidth();
+			if (s > g1.top - 600)  //해당 영역보다 600px위에서 작동
+			{
+				$("#maya").css({"width": gw * 0.25});
+				$("#max").css({"width": gw * 0.25});
+				$("#c4d").css({"width": gw * 0.20});
+				$("#ae").css({"width": gw * 0.70});
+				$("#pr").css({"width": gw * 0.80});
+				$("#ps").css({"width": gw * 0.90});
+				$("#hc").css({"width": gw * 0.40});
+			} 
+
+			//스크롤에 의해 사진이 변경되는 스크립트 
+			var img3d = s;
+			img3d = img3d % (60*7) / 7;
+			/* 매우 큰 값의 나머지를 조절해야 하기 때문에 60의 나머지를 구하는 값에다
+			배수를 곱해주면 그 배수만큼 중복값이 연속으로 생겨 결과적으로
+			ex) 123456789101112 에서 >>> 11111222223333344444 순으로 결과가 출력된다.
+			 ([사진 수]*[값조절])/[값조절] */
+			img3d = Math.floor(img3d)
+			if (img3d < 10) {
+				var img_index = "img/60/얼굴모델링0" + img3d + ".jpg";
+			} else {
+				var img_index = "img/60/얼굴모델링" + img3d + ".jpg";
+			}
+            document.getElementById('img3d1').src = img_index;
+
+            //위아래 스크롤에 따라 옆으로 이동하는 이미지 스크립트 
+            var x = $("#img3d2").offset();//#img3d2의 위치값
+            var wt2 = $("body").innerWidth();
+            var limgC = 0, limg = 0, y_level_value = 0;
+            if (wt2 <= 850) {
+            	if (s + 1500 > x.top ) //현재스크롤값(s)의 -1500px에서 동작합니다
+				{	
+					var limgC = x.top - s; //콘텐츠의 위치 - 현재 스크롤 값
+					var limg = limgC - 550; //두 값의 차 = 아래에서 y(left)값이 된다.
+					var y_level_value = limg / 1; //격차를 줄여 값 조절
+					document.getElementById('img3d2').style.left = y_level_value + '%';
+				} 
+            } else {
+    			if (s + 600 > x.top ) //현재스크롤값(s)의 -300px에서 동작합니다
+				{	
+					var limgC = x.top - s; //콘텐츠의 위치 - 현재 스크롤 값
+					var limg = limgC - 300; //두 값의 차 = 아래에서 y(left)값이 된다.
+					var y_level_value = limg / 2.5; //격차를 줄여 값 조절
+					document.getElementById('img3d2').style.left = y_level_value + '%';
+				} 
+            }
+			
+		}
+		document.getElementsByTagName("body")[0].onresize = function() {object_size()};
+		//객체의 비율을 맞춰주는 jquery
+		function object_size() {
+			textwidth()
+			var vh = 0;
+			vh = $(".videoid").innerWidth() / 1.7777777777;
+			$(".videoid").css({"height": vh});
+
+			//화면조정 시 네비게이션(상단고정메뉴) 중앙정렬
+			var nw = 0; //css에서 %를 사용하여 중앙정렬을 하였기에 양옆 border를 숨기려 1px을 더해주는 jquery입니다.
+			nw = $("header").innerWidth();
+			parseInt(((nw) * 1) + 3) // //정수형변수를 지정합니다. 3px을 더합니다.
+			$(".nav").css({"width": nw});
+			$(".nav").css({"left": -1}); //왼쪽으로 1px이동하여 중앙정렬합니다.
+			
+			
+			//일정 위치에 도달하면 스킬 게이지가 늘어나는 jquery
+			var g2 = $("#skillgauge").offset();
+			var gw2 = $(".gauge").innerWidth();
+			if (s > g2.top - 600) 
+			{
+				$("#maya").css({"width": gw2 * 0.25});
+				$("#max").css({"width": gw2 * 0.25});
+				$("#c4d").css({"width": gw2 * 0.20});
+				$("#ae").css({"width": gw2 * 0.70});
+				$("#pr").css({"width": gw2 * 0.80});
+				$("#ps").css({"width": gw2 * 0.90});
+				$("#hc").css({"width": gw2 * 0.40});
+			}
+			 
+		}
+		function textwidth() {
+			//모바일버전의 한정된 화면을 위해 일부 텍스트를 요약
+			var wt = $("body").innerWidth();
+			if (wt <= 850) { //화면너비가 850이하일때의 실행
+				document.getElementById("ing").innerHTML = "현재 영진전문대학교 재학 중 입니다.";
+				document.getElementById("licensecomment").innerHTML = "지금도 열심히 취득 중 입니다.";
+				document.querySelector(".skillstext:nth-child(1)").innerHTML = "MAYA";
+				document.querySelector(".skillstext:nth-child(2)").innerHTML = "MAX";
+				document.querySelector(".skillstext:nth-child(3)").innerHTML = "C4D";
+				document.querySelector(".skillstext:nth-child(4)").innerHTML = "AE";
+				document.querySelector(".skillstext:nth-child(5)").innerHTML = "PR";
+				document.querySelector(".skillstext:nth-child(6)").innerHTML = "PS";
+				document.querySelector(".skillstext:nth-child(7)").innerHTML = "HTML5";
+			} else {
+				document.getElementById("ing").innerHTML = "2020년 06월 기준 영진전문대학교 컴퓨터정보계열 특수영상반 2학년 재학 중 입니다.";
+				document.getElementById("licensecomment").innerHTML = "2020년 06월 기준 영진전문대학교 컴퓨터정보계열 특수영상반 2학년 재학 중 입니다.";
+				document.querySelector(".skillstext:nth-child(1)").innerHTML = "Auto Desk MAYA";
+				document.querySelector(".skillstext:nth-child(2)").innerHTML = "Auto Desk 3DS MAX";
+				document.querySelector(".skillstext:nth-child(3)").innerHTML = "Maxon Cinema 4D";
+				document.querySelector(".skillstext:nth-child(4)").innerHTML = "Adobe After Effects";
+				document.querySelector(".skillstext:nth-child(5)").innerHTML = "Adobe Premiere Pro";
+				document.querySelector(".skillstext:nth-child(6)").innerHTML = "Adobe Photoshop";
+				document.querySelector(".skillstext:nth-child(7)").innerHTML = "HTML5";
+			}
+		}
+</script>
+<script>
+	//무한 실행 함수
+	setInterval(function() {
+	   blink();
+	}, 1500); //1000 = 1초
+
+	var k = 0;
+	//홈 화면의 아래화살표 깜빡이기.
+	function blink() {
+		if (k % 2 == 1) {
+			$("#DownArrow").css({"opacity": 1});
+			k = k + 1;
+		} else {
+			$("#DownArrow").css({"opacity": 0});
+			k = k + 1;
+		}
+   		
+	}
+</script>
+</html>
